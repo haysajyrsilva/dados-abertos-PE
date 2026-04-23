@@ -19,12 +19,19 @@ npm run format      # prettier format
 
 ```
 src/
-├── app.module.ts          # root module
-├── main.ts                # bootstrap
-├── app.controller.ts      # root controller (GET /)
-├── app.service.ts         # root service
-└── health/
-    └── health.controller.ts  # GET /health
+├── main.ts                              # bootstrap
+├── app.module.ts                        # root module — imports only, no logic
+├── shared/                              # cross-cutting concerns
+│   └── health/
+│       ├── health.module.ts             # HealthModule
+│       └── health.controller.ts        # GET /health
+└── modules/                             # domain modules
+    └── <domain>/
+        ├── domain/                      # entities, value objects, repository interfaces
+        ├── application/                 # use cases, DTOs
+        ├── infrastructure/              # repository implementations, external services
+        ├── presentation/                # controllers
+        └── <domain>.module.ts
 ```
 
 ## Commit messages
